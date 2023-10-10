@@ -3,7 +3,7 @@
 #include <time.h>
 #include <stdbool.h>
 
-#define DIM 	100
+#define DIM 	1000
 #define RANGE 	100
 #define NC 		25
 
