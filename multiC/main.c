@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
-#define DIM 	1000
+#define DIM 	100
 #define RANGE 	100
 #define NC 		25
 
@@ -25,16 +27,32 @@ int BubbleSort(int d, int *v);
 int main()
 {
 	int arr[DIM];
+	int v1[DIM/2];
+	int v2[DIM/2];
 
 	CaricaVettore(DIM, arr);
-	StampaVettore(DIM, arr, "disordinato");
 
-	int passi = BubbleSort(DIM, arr);
+	for (int i = 0; i < DIM/2; i++) v1[i] = arr[i];
+	for (int i = DIM/2 + 1; i < DIM; i++) v2[i-(DIM/2+1)] = arr[i];
 
-	printf("\n\n\n");
-	StampaVettore(DIM, arr, "ordinato");
+	int id = fork();
+	if (id == 0)
+	{
+		int scambi_figlio = BubbleSort(DIM/2, v2);
+		printf("vettore figlio ordinato in %d scambi\n\n", scambi_figlio);
+	}
+	else
+	{
+		int scambi_padre = BubbleSort(DIM / 2, v1);
+		printf("vettore padre ordinato in %d scambi\n", scambi_padre);
+		wait(NULL);
 
-	printf("\n\nvettore ordinato in %d scambi", passi);
+		int passi = BubbleSort(DIM, arr);
+
+		StampaVettore(DIM, arr, "ordinato");
+
+		printf("\n\nvettore ordinato in %d scambi", passi);
+	}
 	return 0;
 }
 
