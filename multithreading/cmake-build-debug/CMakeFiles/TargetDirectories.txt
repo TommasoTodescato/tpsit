@@ -1,3 +1,0 @@
-/home/tommaso/info/tpsit/multithreading/cmake-build-debug/CMakeFiles/multithreading.dir
-/home/tommaso/info/tpsit/multithreading/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/tommaso/info/tpsit/multithreading/cmake-build-debug/CMakeFiles/rebuild_cache.dir
