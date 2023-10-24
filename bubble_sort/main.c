@@ -8,7 +8,6 @@
 #define DIM 	100
 #define RANGE 	100
 #define NC 		25
-
 /*
  * SCOPO : Implementare un bubble sort classico e misurarne la complessità algoritmica.
  *
