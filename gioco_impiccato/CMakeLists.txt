@@ -3,4 +3,6 @@ project(gioco_impiccato)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(gioco_impiccato main.cpp)
+add_executable(gioco_impiccato main.cpp
+        player.cpp
+        include/player.h)
