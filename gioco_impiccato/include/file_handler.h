@@ -4,12 +4,15 @@
 #include <iostream>
 #include <fstream>
 #include <random>
+#include <sstream>
+
+#define SCOREBOARD_PATH "/home/tommaso/info/tpsit/gioco_impiccato/scoreboard.txt"
 
 namespace gioco
 {
 	std::string get_random_word(const std::string& file_path, const int& file_length);
-
-
+	bool print_scoreboard(); // true : success, false : failure
+	bool add_to_scoreboard(const std::string& nickname, int score); // true : success, false: failure
 }
 
 #endif

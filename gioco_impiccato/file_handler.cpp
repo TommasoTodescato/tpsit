@@ -25,8 +25,28 @@ namespace gioco
 		return s;
 	}
 
-	void print_scoreboard()
+	bool print_scoreboard()
 	{
 		cout << "ok";
+		return true;
+	}
+
+	bool add_to_scoreboard(const string& nickname, int score)
+	{
+		fstream f (SCOREBOARD_PATH);
+		if (!f.is_open())
+		{
+			cout << "Percorso non valido" << endl;
+			return false;
+		}
+		stringstream s_buf;
+		s_buf << f.rdbuf();
+
+		string s;
+		while (getline(s_buf, s, ' '))
+		{
+			cout << s << endl;
+		}
+		f.close();
 	}
 }
