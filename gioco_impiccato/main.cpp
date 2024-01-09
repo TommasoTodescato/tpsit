@@ -1,67 +1,14 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <random>
+#include "include/file_handler.h"
+#include "include/game.h"
+
 
 using namespace std;
 
 #define FILE_LEN 60453
 
-string get_random_word(const string& file_path, const int& file_length)
-{
-	string s = "";
-	ifstream words_file (file_path);
-	if (!words_file.is_open())
-	{
-		cout << "Percorso non valido" << endl;
-		return s;
-	}
 
-	random_device r;
-	mt19937 gen(r()); // Mersenne Twister
-	uniform_int_distribution<> distribution(1, file_length);
-	int line_number = distribution(gen);
 
-	for (int i = 1; i <= line_number; i++)
-		getline(words_file, s);
-	words_file.close();
-	return s;
-}
 
-bool play(string word, int tries)
-{
-	cout << word << endl;
-
-	string unknown(word.size(), '_');
-	for (int i = 0; i < tries; i++)
-	{
-		string input;
-		cout << "[?] Indovina la lettera: " << endl;
-		cin >> input;
-		while (input.length() != 1 || !isalpha(input[0]))
-		{
-			cout << "[!] Stringa non alfabetica o troppo lunga. Riprova: " << endl;
-			cin >> input;
-		}
-
-		if (word.find(input[0]) != string::npos)
-		{
-			for (int c = 0; c < unknown.length(); c++)
-				if (word[c] == input[0])
-					unknown[c] = word[c];
-			cout << "[V] Giusto | " << unknown << endl;
-		}
-		else
-			cout << "[X] Sbagliato | " << unknown << endl;
-
-		if (word == unknown)
-		{
-			cout << "[V] HAI VINTO! | " << unknown << endl;
-			return true;
-		}
-	}
-	return word == unknown;
-}
 
 int main()
 {
