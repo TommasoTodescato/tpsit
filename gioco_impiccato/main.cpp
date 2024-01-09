@@ -42,6 +42,5 @@ int main()
 //
 //	gioco::add_to_scoreboard(nickname, tot_score);
 
-
 	return 0;
 }

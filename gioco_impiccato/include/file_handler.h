@@ -5,6 +5,7 @@
 #include <fstream>
 #include <random>
 #include <sstream>
+#include <algorithm>
 
 #define SCOREBOARD_PATH "/home/tommaso/info/tpsit/gioco_impiccato/scoreboard.txt"
 
