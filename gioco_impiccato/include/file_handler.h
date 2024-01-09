@@ -10,4 +10,4 @@ namespace gioco
 	std::string get_random_word(const std::string& file_path, const int& file_length);
 }
 
-#endif //GIOCO_IMPICCATO_FILE_HANDLER_H
+#endif
