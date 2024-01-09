@@ -7,18 +7,17 @@ namespace gioco
 {
 	class player
 	{
-	private:
-		std::string name;
-
 	public:
-		explicit player(std::string name)
+		std::string name;
+		int life;
+
+		explicit player(const std::string& name, const int& life)
 		{
 			this->name = name;
+			this->life = life;
 		}
 
-		bool play(std::string word, int tries);
-
-
+		int play(std::string word); //returns the score, or 0 if lost
 	};
 }
 

@@ -1,5 +1,4 @@
 #include "include/file_handler.h"
-
 using namespace std;
 
 namespace gioco
@@ -21,7 +20,13 @@ namespace gioco
 
 		for (int i = 1; i <= line_number; i++)
 			getline(words_file, s);
+
 		words_file.close();
 		return s;
+	}
+
+	void print_scoreboard()
+	{
+		cout << "ok";
 	}
 }

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define SCORE_PATH "/home/tommaso/info/tpsit/gioco_impiccato/a.txt"
+#define SCORE_PATH "/home/tommaso/info/tpsit/gioco_impiccato/scoreboard.txt"
 #define INPUT_PATH "/home/tommaso/info/tpsit/gioco_impiccato/parole.txt"
 #define INPUT_LEN 60453
 
@@ -23,12 +23,19 @@ string input_nickname()
 int main()
 {
 	string nickname = input_nickname();
-	auto p = gioco::player(nickname);
+	auto p = gioco::player(nickname, 10);
 	string word = gioco::get_random_word(INPUT_PATH, INPUT_LEN);
 
-	bool victory = p.play(word, 10);
-	if (!victory)
-		cout << "[X] HAI PERSO! | " << word << endl;
+	cout << word << endl;
+
+	int tot_score = 0;
+	while (p.life > 0)
+	{
+		int score = p.play(word);
+		tot_score += score;
+	}
+	cout << "[X] HAI PERSO! | punteggio = " << tot_score << endl;
+
 
 	ofstream myfile (SCORE_PATH, ios::app);
 	if (!myfile.is_open())
