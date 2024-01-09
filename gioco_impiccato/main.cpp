@@ -28,19 +28,15 @@ string get_random_word(const string& file_path, const int& file_length)
 	return s;
 }
 
-int main()
+bool play(string word, int tries)
 {
-	int tries = 10;
-
-	string word = get_random_word("/home/tommaso/info/tpsit/gioco_impiccato/parole.txt", FILE_LEN);
 	cout << word << endl;
 
 	string unknown(word.size(), '_');
 	for (int i = 0; i < tries; i++)
 	{
-		cout << "[?] Indovina la lettera: " << endl;
-
 		string input;
+		cout << "[?] Indovina la lettera: " << endl;
 		cin >> input;
 		while (input.length() != 1 || !isalpha(input[0]))
 		{
@@ -61,13 +57,18 @@ int main()
 		if (word == unknown)
 		{
 			cout << "[V] HAI VINTO! | " << unknown << endl;
-			break;
+			return true;
 		}
 	}
-	if (word != unknown)
-	{
+	return word == unknown;
+}
+
+int main()
+{
+	string word = get_random_word("/home/tommaso/info/tpsit/gioco_impiccato/parole.txt", FILE_LEN);
+	bool victory = play(word, 10);
+	if (!victory)
 		cout << "[X] HAI PERSO! | " << word << endl;
-	}
 
 //	ofstream myfile ("/home/tommaso/info/tpsit/gioco_impiccato/a.txt", ios::app);
 //	if (!myfile.is_open())
