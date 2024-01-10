@@ -50,26 +50,28 @@ namespace gioco
 		stringstream s;
 		s << f.rdbuf();
 		cout << "---CLASSIFICA---\n" << s.str() << "\n----------------" << endl;
+		f.close();
 		return true;
 	}
 
 	bool add_to_scoreboard(const string& nickname, int score)
 	{
-		fstream f (SCOREBOARD_PATH);
-		if (!f.is_open())
+		ifstream in_f (SCOREBOARD_PATH);
+		if (!in_f.is_open())
 		{
 			cout << "Percorso non valido" << endl;
 			return false;
 		}
 		string line;
 		vector<string> splitted;
-		while (getline(f, line))
+		while (getline(in_f, line))
 		{
 			istringstream s_buf(line);
 			string s;
 			while (getline(s_buf, s, '-'))
 				splitted.push_back(trim(s));
 		}
+		in_f.close();
 
 		vector<pair<string, int>> player_points;
 		for (int i = 1; i < splitted.size(); i+=2)
@@ -79,11 +81,14 @@ namespace gioco
 			player.second = stoi(splitted[i]);
 			player_points.push_back(player);
 		}
+		player_points.push_back({nickname, score});
+
+		ofstream out_f (SCOREBOARD_PATH);
 		sort(player_points.begin(), player_points.end(), compare);
 		for (auto &x : player_points)
-			cout << x.first << " - " << x.second << endl;
+			out_f << x.first << " - " << x.second << endl;
 
-		f.close();
+		out_f.close();
 		return true;
 	}
 }

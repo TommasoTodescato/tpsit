@@ -46,8 +46,6 @@ int main()
 			tot_score += score;
 		}
 		cout << "[X] HAI PERSO! | punteggio = " << tot_score << endl;
-
-
 		gioco::add_to_scoreboard(nickname, tot_score);
 	}
 	return 0;
