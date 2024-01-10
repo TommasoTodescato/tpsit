@@ -81,10 +81,21 @@ namespace gioco
 			player.second = stoi(splitted[i]);
 			player_points.push_back(player);
 		}
-		player_points.push_back({nickname, score});
+
+		bool alr = false;
+		for (auto &x : player_points)
+		{
+			if (nickname == x.first)
+			{
+				x.second = max(score, x.second);
+				alr = true;
+			}
+		}
+		if (!alr) player_points.push_back({nickname, score});
+
+		sort(player_points.begin(), player_points.end(), compare);
 
 		ofstream out_f (SCOREBOARD_PATH);
-		sort(player_points.begin(), player_points.end(), compare);
 		for (auto &x : player_points)
 			out_f << x.first << " - " << x.second << endl;
 

@@ -1,5 +1,2 @@
-prova - 95
-ciao - 69
-tom - 54
-gay - 42
-asdsbora - 9
+tommaso - 34
+tom - 6

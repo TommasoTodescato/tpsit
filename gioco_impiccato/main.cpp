@@ -2,8 +2,9 @@
 #include "include/player.h"
 using namespace std;
 
-#define INPUT_PATH "/home/tommaso/info/tpsit/gioco_impiccato/parole.txt"
+#define INPUT_PATH "parole.txt"
 #define INPUT_LEN 60453
+#define LIFES 10
 
 string input_nickname()
 {
@@ -27,7 +28,7 @@ int main()
 				"<1> Classifica\n"
 				"<n> Esci" << endl;
 		cin >> mod;
-		if (mod != 0 && mod != 1) return 0;
+		if (cin.fail() || (mod != 0 && mod != 1)) return 0;
 		if (mod)
 		{
 			gioco::print_scoreboard();
@@ -35,18 +36,20 @@ int main()
 		}
 
 		string nickname = input_nickname();
-		auto p = gioco::player(nickname, 10);
+		auto p = gioco::player(nickname, LIFES);
 
 		int tot_score = 0;
 		while (p.life > 0)
 		{
 			string word = gioco::get_random_word(INPUT_PATH, INPUT_LEN);
-			cout << word << endl;
-			int score = p.play(word);
-			tot_score += score;
+			if (word.empty()) return 1;
+
+			// cout << word << endl; // decommentando questo si ha la soluzione ( solo per testing )
+			tot_score += p.play(word);
 		}
 		cout << "[X] HAI PERSO! | punteggio = " << tot_score << endl;
 		gioco::add_to_scoreboard(nickname, tot_score);
+		mod = 1;
 	}
 	return 0;
 }

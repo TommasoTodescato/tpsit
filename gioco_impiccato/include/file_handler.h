@@ -7,7 +7,7 @@
 #include <sstream>
 #include <algorithm>
 
-#define SCOREBOARD_PATH "/home/tommaso/info/tpsit/gioco_impiccato/scoreboard.txt"
+#define SCOREBOARD_PATH "scoreboard.txt"
 
 namespace gioco
 {
