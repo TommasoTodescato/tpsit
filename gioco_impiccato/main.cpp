@@ -20,27 +20,35 @@ string input_nickname()
 
 int main()
 {
-	const string a = "tom";
-	gioco::add_to_scoreboard(a, 50);
+	int mod = 1;
+	while (mod)
+	{
+		cout << "\n<0> Gioca\n"
+				"<1> Classifica\n"
+				"<n> Esci" << endl;
+		cin >> mod;
+		if (mod != 0 && mod != 1) return 0;
+		if (mod)
+		{
+			gioco::print_scoreboard();
+			continue;
+		}
+
+		string nickname = input_nickname();
+		auto p = gioco::player(nickname, 10);
+
+		int tot_score = 0;
+		while (p.life > 0)
+		{
+			string word = gioco::get_random_word(INPUT_PATH, INPUT_LEN);
+			cout << word << endl;
+			int score = p.play(word);
+			tot_score += score;
+		}
+		cout << "[X] HAI PERSO! | punteggio = " << tot_score << endl;
 
 
-
-
-//	string nickname = input_nickname();
-//	auto p = gioco::player(nickname, 10);
-//
-//	int tot_score = 0;
-//	while (p.life > 0)
-//	{
-//		string word = gioco::get_random_word(INPUT_PATH, INPUT_LEN);
-//		cout << word << endl;
-//		int score = p.play(word);
-//		tot_score += score;
-//	}
-//	cout << "[X] HAI PERSO! | punteggio = " << tot_score << endl;
-//
-//
-//	gioco::add_to_scoreboard(nickname, tot_score);
-
+		gioco::add_to_scoreboard(nickname, tot_score);
+	}
 	return 0;
 }

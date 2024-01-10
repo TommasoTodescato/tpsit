@@ -41,7 +41,15 @@ namespace gioco
 
 	bool print_scoreboard()
 	{
-		cout << "ok";
+		ifstream f (SCOREBOARD_PATH);
+		if (!f.is_open())
+		{
+			cout << "Percorso non valido" << endl;
+			return false;
+		}
+		stringstream s;
+		s << f.rdbuf();
+		cout << "---CLASSIFICA---\n" << s.str() << "\n----------------" << endl;
 		return true;
 	}
 
@@ -69,12 +77,9 @@ namespace gioco
 			pair<string, int> player;
 			player.first = splitted[i-1];
 			player.second = stoi(splitted[i]);
-
 			player_points.push_back(player);
 		}
-
 		sort(player_points.begin(), player_points.end(), compare);
-
 		for (auto &x : player_points)
 			cout << x.first << " - " << x.second << endl;
 

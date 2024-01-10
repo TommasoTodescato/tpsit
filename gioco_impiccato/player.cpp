@@ -38,7 +38,7 @@ namespace gioco
 
 			if (word == unknown)
 			{
-				cout << "[V] HAI VINTO! | " << unknown << endl;
+				cout << "[V] HAI VINTO! | " << unknown << endl << endl;
 				this->life--;
 				return (int)word.length();
 			}
